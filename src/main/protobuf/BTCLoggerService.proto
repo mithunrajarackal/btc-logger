@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "btc.logger.proto";
+
+package btclogger;
+
+// gRPC definition for BTCLoggerService
+
+service BTCLoggerService {
+  rpc InsertBTC (InsertBTCRequest) returns (SuccessResponse) {}
+  rpc GetHourlyLog (GetLogRequest) returns (GetLogResponse) {}
+}
+
+message InsertBTCRequest {
+  string datetime = 1;
+  double amount = 2;
+}
+
+message SuccessResponse {
+  bool success = 1;
+}
+
+message GetLogRequest {
+  string startDatetime = 1;
+  string endDatetime = 2;
+}
+
+message HourlyLogResponse {
+  string datetime = 1;
+  double amount = 2;
+}
+
+message GetLogResponse {
+  repeated HourlyLogResponse h = 1;
+}
